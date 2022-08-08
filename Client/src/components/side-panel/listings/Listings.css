@@ -1,0 +1,28 @@
+.listing-image {
+    border-radius: 4px;
+    width: 77px;
+    height: 78px;
+}
+
+.listing-headline {
+    font-size: 12px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 228px;
+}
+
+.remove-label {
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5f5fff;
+    margin-top: 5px;
+}
+
+.styled-hr {
+    background-color: #d9d9d9;
+    height: 1px;
+    border: 0;
+    margin-top: 15px;
+}
