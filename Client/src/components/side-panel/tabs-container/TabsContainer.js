@@ -68,10 +68,11 @@ const TabsContainer = (props) => {
       </Box>
       <div style={{ color: "#787878", marginTop: 10 }}>
         {" "}
-        <Checkbox size="small" /> Select all properties
+        <Checkbox size="small" style={{ marginLeft: 4 }} /> Select all
+        properties
       </div>
       <TabPanel value={value} index={0}>
-        <Listings />
+        <Listings {...props} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
