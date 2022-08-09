@@ -11,6 +11,9 @@ const FilterInputs = (props) => {
     <div>
       <Stack direction="row" spacing={1}>
         <TextField
+          onInput={(e) => {
+            props.setSearchText(e.target.value);
+          }}
           id="outlined-basic"
           placeholder="Search by property ID or by title"
           sx={{

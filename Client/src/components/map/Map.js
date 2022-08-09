@@ -91,11 +91,6 @@ const Map = (props) => {
                 // onClick={(e) => handleMarkerClick(listing)}
                 onMouseOver={(e) => handleMarkerClick(listing)}
                 onMouseOut={(e) => handleMarkerClick({})}
-                // icon={
-                //   props.hoveredListing.listingNumber === listing.listingNumber
-                //     ? listing.images[0].c9_uri
-                //     : "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-                // }
               />
               {props.hoveredListing.listingNumber === listing.listingNumber ? (
                 <OverlayView

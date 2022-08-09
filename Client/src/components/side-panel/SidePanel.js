@@ -7,12 +7,18 @@ import TabsContainer from "./tabs-container/TabsContainer";
 
 const SidePanel = (props) => {
   // console.log("props.selectedListingNumber", props.selectedListingNumber);
+  const [searchText, setSearchText] = React.useState("");
   return (
     <div className="sidepanel-container">
       <div className="filter-inputs">
-        <FilterInputs {...props} />
+        <FilterInputs
+          {...props}
+          setSearchText={(text) => {
+            setSearchText(text);
+          }}
+        />
       </div>
-      <TabsContainer {...props} />
+      <TabsContainer {...props} searchText={searchText} />
       <CustomPagination {...props} />
     </div>
   );
