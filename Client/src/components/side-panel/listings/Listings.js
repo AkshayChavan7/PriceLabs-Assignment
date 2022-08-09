@@ -6,11 +6,24 @@ import "./Listings.css";
 const Listing = (props) => {
   let listings = props.listings;
   return (
-    <div style={{ height: "100vh", overflowY: "scroll" }}>
+    <div style={{ height: "69vh", overflowY: "scroll", overflowX: "hidden" }}>
       {listings.map((listing) => {
         return (
-          <div style={{ padding: 2 }} id={listing.propertyMetadata.headline}>
-            <Stack direction="row" spacing={1}>
+          <div
+            style={{ padding: 2 }}
+            key={listing.propertyMetadata.headline}
+            onMouseEnter={() => props.setHoveredListing(listing)}
+            onMouseLeave={() => props.setHoveredListing({})}
+          >
+            <Stack
+              direction="row"
+              spacing={1}
+              className={
+                listing.listingNumber === props.selectedListingNumber
+                  ? "selected-listing"
+                  : "listing"
+              }
+            >
               <Checkbox size="small" />
               <img src={listing.images[0].c6_uri} className="listing-image" />
               <Stack spacing={0.001}>

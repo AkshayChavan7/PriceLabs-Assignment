@@ -1,0 +1,17 @@
+.marker-info-div {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    border: 1px solid lightgray;
+    min-width: 180px;
+    min-height: 80px;
+    overflow: hidden;
+    padding: 7px;
+}
+
+
+.info-div-image {
+    border-radius: 4px;
+    width: 47px;
+    height: 50px;
+}

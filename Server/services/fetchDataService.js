@@ -9,7 +9,7 @@ module.exports.fetchData = async (requestParams) => {
         request: {
           paging: {
             page: 1,
-            pageSize: 50,
+            pageSize: 5,
           },
           filterVersion: "1",
           filters: [],

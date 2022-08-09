@@ -51,17 +51,17 @@ const TabsContainer = (props) => {
         >
           <Tab
             style={{ textTransform: "none", fontSize: 12 }}
-            label="Comp Set (49)"
+            label={`Comp Set (${props.listings.length})`}
             {...a11yProps(0)}
           />
           <Tab
             style={{ textTransform: "none", fontSize: 12 }}
-            label="Other properties (951)"
+            label={`Other properties (${props.listings.length})`}
             {...a11yProps(1)}
           />
           <Tab
             style={{ textTransform: "none", fontSize: 12 }}
-            label="Hotels (52)"
+            label={`Hotels (${props.listings.length})`}
             {...a11yProps(2)}
           />
         </Tabs>
@@ -75,10 +75,10 @@ const TabsContainer = (props) => {
         <Listings {...props} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <Listings {...props} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <Listings {...props} />
       </TabPanel>
     </Box>
   );
