@@ -88,7 +88,9 @@ const Map = (props) => {
               <Marker
                 position={position}
                 title={listing.propertyMetadata.headline}
-                onClick={(e) => handleMarkerClick(listing)}
+                // onClick={(e) => handleMarkerClick(listing)}
+                onMouseOver={(e) => handleMarkerClick(listing)}
+                onMouseOut={(e) => handleMarkerClick({})}
                 // icon={
                 //   props.hoveredListing.listingNumber === listing.listingNumber
                 //     ? listing.images[0].c9_uri
