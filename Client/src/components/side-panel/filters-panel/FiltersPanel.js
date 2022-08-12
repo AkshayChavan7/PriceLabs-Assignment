@@ -24,7 +24,7 @@ const FiltersPanel = (props) => {
   //   maxSleeps: 20,
   //   minStars: 0,
   // };
-  const [filtersObject, setFiltersObject] = React.useState(props.filtersObject);
+  // const [filtersObject, setFiltersObject] = React.useState(props.filtersObject);
 
   const handleReviewCheckboxSelect = (isChecked, selectedRating) => {
     console.log(isChecked, selectedRating);
@@ -47,14 +47,14 @@ const FiltersPanel = (props) => {
     // console.log("reviewsCheckboxObj", reviewsCheckboxObj);
 
     if (reviewsCheckboxObj.five) {
-      filtersObject.minStars = 5;
-      setFiltersObject(filtersObject);
+      props.filtersObject.minStars = 5;
+      props.setFiltersObject(props.filtersObject);
     } else if (reviewsCheckboxObj.four) {
-      filtersObject.minStars = 4;
-      setFiltersObject(filtersObject);
+      props.filtersObject.minStars = 4;
+      props.setFiltersObject(props.filtersObject);
     } else {
-      filtersObject.minStars = 0;
-      setFiltersObject(filtersObject);
+      props.filtersObject.minStars = 0;
+      props.setFiltersObject(props.filtersObject);
     }
 
     // console.log("filtersObject", filtersObject);
@@ -77,8 +77,8 @@ const FiltersPanel = (props) => {
         maxValue={5}
         reset={reset}
         applyFilters={applyFilters}
-        filtersObject={filtersObject}
-        setFiltersObject={(obj) => setFiltersObject(obj)}
+        filtersObject={props.filtersObject}
+        setFiltersObject={(obj) => props.setFiltersObject(obj)}
       />
       <MinMaxFilter
         categoryTitle="Bathrooms"
@@ -86,8 +86,8 @@ const FiltersPanel = (props) => {
         maxValue={5}
         reset={reset}
         applyFilters={applyFilters}
-        filtersObject={filtersObject}
-        setFiltersObject={(obj) => setFiltersObject(obj)}
+        filtersObject={props.filtersObject}
+        setFiltersObject={(obj) => props.setFiltersObject(obj)}
       />
       <MinMaxFilter
         categoryTitle="Sleeps"
@@ -95,8 +95,8 @@ const FiltersPanel = (props) => {
         maxValue={20}
         reset={reset}
         applyFilters={applyFilters}
-        filtersObject={filtersObject}
-        setFiltersObject={(obj) => setFiltersObject(obj)}
+        filtersObject={props.filtersObject}
+        setFiltersObject={(obj) => props.setFiltersObject(obj)}
       />
       {/* Property reviews div */}
       <div style={{ marginTop: 15 }}>
@@ -168,7 +168,7 @@ const FiltersPanel = (props) => {
           clickable={true}
           onClick={() => {
             setApplyFilters(applyFilters + 1);
-            props.setFiltersObject(filtersObject);
+            props.setFiltersObject(props.filtersObject);
           }}
         />
       </Stack>

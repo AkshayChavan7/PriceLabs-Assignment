@@ -21,6 +21,10 @@ const SidePanel = (props) => {
   const [filtersObject, setFiltersObject] =
     React.useState(defaultFiltersObject);
   const [filtersPanelOpen, setFiltersPanelOpen] = React.useState(false);
+  const setFiltersObject2 = (obj) => {
+    console.log("setFiltersObject2 called", obj);
+    setFiltersObject(obj);
+  };
   console.log("filtersObject", filtersObject);
   return (
     <Stack direction={"row"}>
@@ -49,7 +53,7 @@ const SidePanel = (props) => {
             setFiltersPanelOpen(value);
           }}
           filtersObject={filtersObject}
-          setFiltersObject={(obj) => setFiltersObject(obj)}
+          setFiltersObject={(obj) => setFiltersObject2(obj)}
         />
       ) : (
         <></>

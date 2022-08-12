@@ -35,7 +35,6 @@ function a11yProps(index) {
 }
 
 const TabsContainer = (props) => {
-  // console.log("props.searchText", props.searchText);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {

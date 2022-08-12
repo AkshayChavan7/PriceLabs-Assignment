@@ -4,7 +4,7 @@ import { Rate } from "antd";
 import "./Listings.css";
 
 const Listing = (props) => {
-  console.log("props", props);
+  console.log("listings props ==>", props);
   let listings = props.listings;
   return (
     <div style={{ height: "69vh", overflowY: "scroll", overflowX: "hidden" }}>

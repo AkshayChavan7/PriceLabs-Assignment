@@ -32,7 +32,7 @@ const MinMaxFilter = (props) => {
         console.log("categoryTitle didn't match while applying filters!");
     }
 
-    // console.log("setting filtersObject", filtersObject);
+    console.log("setting filtersObject", filtersObject);
     props.setFiltersObject(filtersObject);
   }, [props.applyFilters]);
 
