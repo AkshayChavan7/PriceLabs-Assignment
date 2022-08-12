@@ -9,6 +9,10 @@
     border: 1px solid #e6e6e6;
   }
 
+  .center:hover {
+    cursor: pointer;
+  }
+
   .pagination-input {
     border-radius: 5px;
     width: 25px;

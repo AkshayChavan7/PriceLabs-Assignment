@@ -1,4 +1,11 @@
 .filters-panel-container {
-    min-width: 310px;
-    padding: 20px;
+    min-width: 300px;
+    padding: 25px;
+}
+
+.reset-apply-buttons-container {
+    position: absolute;
+    bottom: 10px;
+    /* float: right; */
+    margin-left: 75px;
 }

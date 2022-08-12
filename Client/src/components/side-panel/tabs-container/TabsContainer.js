@@ -35,13 +35,14 @@ function a11yProps(index) {
 }
 
 const TabsContainer = (props) => {
-  console.log("props.searchText", props.searchText);
+  // console.log("props.searchText", props.searchText);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  // console.log("filtersObject from Tabs", props.filtersObject);
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -69,8 +70,11 @@ const TabsContainer = (props) => {
       </Box>
       <div style={{ color: "#787878", marginTop: 10 }}>
         {" "}
-        <Checkbox size="small" style={{ marginLeft: 4 }} /> Select all
-        properties
+        <Checkbox
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 17 } }}
+          style={{ marginLeft: 4 }}
+        />
+        <span>Select all properties</span>
       </div>
       <TabPanel value={value} index={0}>
         <Listings {...props} />

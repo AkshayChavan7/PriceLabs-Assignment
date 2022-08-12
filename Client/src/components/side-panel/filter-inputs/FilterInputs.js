@@ -39,6 +39,9 @@ const FilterInputs = (props) => {
           variant="outlined"
           clickable="true"
           sx={{ height: 40, width: "auto", padding: 1 }}
+          onClick={(e) => {
+            props.setFiltersPanelOpen(true);
+          }}
         />
       </Stack>
     </div>

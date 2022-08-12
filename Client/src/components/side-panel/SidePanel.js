@@ -9,6 +9,19 @@ import TabsContainer from "./tabs-container/TabsContainer";
 const SidePanel = (props) => {
   // console.log("props.selectedListingNumber", props.selectedListingNumber);
   const [searchText, setSearchText] = React.useState("");
+  const defaultFiltersObject = {
+    minBedrooms: 0,
+    maxBedrooms: 5,
+    minBathrooms: 0,
+    maxBathrooms: 5,
+    minSleeps: 1,
+    maxSleeps: 20,
+    minStars: 0,
+  };
+  const [filtersObject, setFiltersObject] =
+    React.useState(defaultFiltersObject);
+  const [filtersPanelOpen, setFiltersPanelOpen] = React.useState(false);
+  console.log("filtersObject", filtersObject);
   return (
     <Stack direction={"row"}>
       <div className="sidepanel-container">
@@ -18,12 +31,29 @@ const SidePanel = (props) => {
             setSearchText={(text) => {
               setSearchText(text);
             }}
+            setFiltersPanelOpen={(value) => {
+              setFiltersPanelOpen(value);
+            }}
           />
         </div>
-        <TabsContainer {...props} searchText={searchText} />
+        <TabsContainer
+          {...props}
+          searchText={searchText}
+          filtersObject={filtersObject}
+        />
         <CustomPagination {...props} />
       </div>
-      <FiltersPanel />
+      {filtersPanelOpen ? (
+        <FiltersPanel
+          setFiltersPanelOpen={(value) => {
+            setFiltersPanelOpen(value);
+          }}
+          filtersObject={filtersObject}
+          setFiltersObject={(obj) => setFiltersObject(obj)}
+        />
+      ) : (
+        <></>
+      )}
     </Stack>
   );
 };
