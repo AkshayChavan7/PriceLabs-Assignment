@@ -4,7 +4,7 @@ import { Rate } from "antd";
 import "./Listings.css";
 
 const Listing = (props) => {
-  console.log("listings props ==>", props);
+  // console.log("listings props ==>", props);
   let listings = props.listings;
   return (
     <div style={{ height: "69vh", overflowY: "scroll", overflowX: "hidden" }}>
@@ -18,17 +18,14 @@ const Listing = (props) => {
             .toLowerCase()
             ?.includes(props.searchText.toLowerCase())
         ) {
-          console.log(
-            "listing.bath",
-            listing.bathrooms.full,
-            "props.min",
-            props.filtersObject.minBathrooms,
-            "props.max",
-            props.filtersObject.maxBathrooms
-          );
           if (
+            listing.averageRating >= props.filtersObject.minStars &&
             listing.bathrooms.full >= props.filtersObject.minBathrooms &&
-            listing.bathrooms.full <= props.filtersObject.maxBathrooms
+            listing.bathrooms.full <= props.filtersObject.maxBathrooms &&
+            listing.bedrooms >= props.filtersObject.minBedrooms &&
+            listing.bedrooms <= props.filtersObject.maxBedrooms &&
+            listing.sleeps >= props.filtersObject.minSleeps &&
+            listing.sleeps <= props.filtersObject.maxSleeps
           ) {
             return (
               <div

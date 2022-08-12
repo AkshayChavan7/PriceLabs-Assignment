@@ -43,7 +43,7 @@ function App() {
 
   const setListingNumber = (number) => {
     setSelectedListingNumber(number);
-    console.log("selected listing number set", number);
+    // console.log("selected listing number set", number);
   };
 
   return (

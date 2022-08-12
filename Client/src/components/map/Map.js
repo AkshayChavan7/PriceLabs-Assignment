@@ -64,11 +64,11 @@ const Map = (props) => {
   };
 
   const handleMarkerClick = (listing) => {
-    console.log("handleMarkerClick called", listing);
+    // console.log("handleMarkerClick called", listing);
     props.setSelectedListingNumber(listing.listingNumber);
   };
 
-  console.log("propsss", props);
+  // console.log("propsss", props);
   return isLoaded ? (
     <>
       <GoogleMap

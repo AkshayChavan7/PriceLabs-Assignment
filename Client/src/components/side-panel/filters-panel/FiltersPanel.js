@@ -8,6 +8,7 @@ import { padding } from "@mui/system";
 import React from "react";
 
 const FiltersPanel = (props) => {
+  // console.log("filterspanel props", props);
   const [reset, setReset] = React.useState(0); // this we will use for refreshing the MinMaxFilter compoent after resetting the filters
   const [applyFilters, setApplyFilters] = React.useState(0); // to be updated when apply filters button gets clicked
   const [reviewsCheckboxObj, setReviewsCheckboxObj] = React.useState({
@@ -27,7 +28,7 @@ const FiltersPanel = (props) => {
   // const [filtersObject, setFiltersObject] = React.useState(props.filtersObject);
 
   const handleReviewCheckboxSelect = (isChecked, selectedRating) => {
-    console.log(isChecked, selectedRating);
+    // console.log(isChecked, selectedRating);
     switch (selectedRating) {
       case 5:
         reviewsCheckboxObj.five = isChecked;
