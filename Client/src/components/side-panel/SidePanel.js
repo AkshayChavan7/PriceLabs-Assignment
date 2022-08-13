@@ -32,6 +32,7 @@ const SidePanel = (props) => {
         <div className="filter-inputs">
           <FilterInputs
             {...props}
+            searchText={searchText}
             setSearchText={(text) => {
               setSearchText(text);
             }}
@@ -51,6 +52,9 @@ const SidePanel = (props) => {
         <FiltersPanel
           setFiltersPanelOpen={(value) => {
             setFiltersPanelOpen(value);
+          }}
+          setSearchText={(text) => {
+            setSearchText(text);
           }}
           filtersObject={filtersObject}
           setFiltersObject={(obj) => setFiltersObject({ ...obj })}

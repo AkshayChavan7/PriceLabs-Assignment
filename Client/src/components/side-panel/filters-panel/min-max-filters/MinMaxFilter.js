@@ -6,11 +6,14 @@ import React from "react";
 const MinMaxFilter = (props) => {
   const [minValue, setMinValue] = React.useState(props.minValue);
   const [maxValue, setMaxValue] = React.useState(props.maxValue);
+  const [callApplyFilters, setCallApplyFilters] = React.useState(0);
 
   // used for refreshing the component state after clicking reset button
   React.useEffect(() => {
     setMinValue(props.minValue);
     setMaxValue(props.maxValue);
+    props.setSearchText("");
+    setCallApplyFilters(callApplyFilters + 1);
   }, [props.reset]);
 
   React.useEffect(() => {
@@ -34,7 +37,7 @@ const MinMaxFilter = (props) => {
 
     // console.log("setting filtersObject", filtersObject);
     props.setFiltersObject(filtersObject);
-  }, [props.applyFilters]);
+  }, [props.applyFilters, callApplyFilters]);
 
   return (
     <div style={{ marginTop: 15 }}>

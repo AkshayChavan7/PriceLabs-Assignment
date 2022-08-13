@@ -16,6 +16,10 @@ const FiltersPanel = (props) => {
     four: false,
     zero: false,
   });
+  const [checkbox5, setCheckbox5] = React.useState(false);
+  const [checkbox4, setCheckbox4] = React.useState(false);
+  const [checkbox0, setCheckbox0] = React.useState(false);
+
   // const defaultFiltersObject = {
   //   minBedrooms: 0,
   //   maxBedrooms: 5,
@@ -80,6 +84,9 @@ const FiltersPanel = (props) => {
         applyFilters={applyFilters}
         filtersObject={props.filtersObject}
         setFiltersObject={(obj) => props.setFiltersObject(obj)}
+        setSearchText={(text) => {
+          props.setSearchText(text);
+        }}
       />
       <MinMaxFilter
         categoryTitle="Bathrooms"
@@ -89,6 +96,9 @@ const FiltersPanel = (props) => {
         applyFilters={applyFilters}
         filtersObject={props.filtersObject}
         setFiltersObject={(obj) => props.setFiltersObject(obj)}
+        setSearchText={(text) => {
+          props.setSearchText(text);
+        }}
       />
       <MinMaxFilter
         categoryTitle="Sleeps"
@@ -98,14 +108,22 @@ const FiltersPanel = (props) => {
         applyFilters={applyFilters}
         filtersObject={props.filtersObject}
         setFiltersObject={(obj) => props.setFiltersObject(obj)}
+        setSearchText={(text) => {
+          props.setSearchText(text);
+        }}
       />
       {/* Property reviews div */}
       <div style={{ marginTop: 15 }}>
         <div className="title-text">Property reviews</div>
         <Stack direction={"row"} spacing={1}>
           <Checkbox
+            id="checkbox-5-stars"
             sx={{ "& .MuiSvgIcon-root": { fontSize: 17 } }}
-            onChange={(e) => handleReviewCheckboxSelect(e.target.checked, 5)}
+            onChange={(e) => {
+              setCheckbox5(e.target.checked);
+              handleReviewCheckboxSelect(e.target.checked, 5);
+            }}
+            checked={checkbox5}
           />
           <Rate
             disabled
@@ -119,8 +137,13 @@ const FiltersPanel = (props) => {
         </Stack>
         <Stack direction={"row"} spacing={1}>
           <Checkbox
+            id="checkbox-4-stars"
             sx={{ "& .MuiSvgIcon-root": { fontSize: 17 } }}
-            onChange={(e) => handleReviewCheckboxSelect(e.target.checked, 4)}
+            onChange={(e) => {
+              setCheckbox4(e.target.checked);
+              handleReviewCheckboxSelect(e.target.checked, 4);
+            }}
+            checked={checkbox4}
           />
           <Rate
             disabled
@@ -134,8 +157,13 @@ const FiltersPanel = (props) => {
         </Stack>
         <Stack direction={"row"} spacing={1}>
           <Checkbox
+            id="checkbox-0-stars"
             sx={{ "& .MuiSvgIcon-root": { fontSize: 17 } }}
-            onChange={(e) => handleReviewCheckboxSelect(e.target.checked, 0)}
+            onChange={(e) => {
+              setCheckbox0(e.target.checked);
+              handleReviewCheckboxSelect(e.target.checked, 0);
+            }}
+            checked={checkbox0}
           />
           <Rate
             disabled
@@ -160,7 +188,15 @@ const FiltersPanel = (props) => {
           variant="outlined"
           sx={{ padding: 1 }}
           clickable={true}
-          onClick={() => setReset(reset + 1)}
+          onClick={() => {
+            setCheckbox5(false);
+            setCheckbox4(false);
+            setCheckbox0(false);
+            handleReviewCheckboxSelect(false, 5);
+            handleReviewCheckboxSelect(false, 4);
+            handleReviewCheckboxSelect(false, 0);
+            setReset(reset + 1);
+          }}
         />
         <Chip
           label="Apply"

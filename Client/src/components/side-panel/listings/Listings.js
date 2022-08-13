@@ -6,6 +6,8 @@ import "./Listings.css";
 const Listing = (props) => {
   // console.log("listings props ==>", props);
   let listings = props.listings;
+  let filteredListings = [];
+
   return (
     <div style={{ height: "69vh", overflowY: "scroll", overflowX: "hidden" }}>
       {listings.map((listing) => {
@@ -27,6 +29,7 @@ const Listing = (props) => {
             listing.sleeps >= props.filtersObject.minSleeps &&
             listing.sleeps <= props.filtersObject.maxSleeps
           ) {
+            filteredListings.push(listing);
             return (
               <div
                 style={{ padding: 2 }}
@@ -82,6 +85,9 @@ const Listing = (props) => {
           }
         }
       })}
+      {filteredListings.length !== props.filteredListings.length
+        ? props.setFilteredListings([...filteredListings])
+        : null}
     </div>
   );
 };

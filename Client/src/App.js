@@ -9,6 +9,7 @@ import { Stack } from "@mui/material";
 
 function App() {
   const [listings, setListings] = React.useState([]);
+  const [filteredListings, setFilteredListings] = React.useState([]);
   const [selectedListingNumber, setSelectedListingNumber] = React.useState(0);
   const [hoveredListing, setHoveredListing] = React.useState({});
 
@@ -35,6 +36,7 @@ function App() {
         const respListings = await getFilteredListings(requestParams);
         console.log("response->", respListings);
         setListings(respListings);
+        setFilteredListings(respListings);
       } catch (err) {
         console.log("Error while calling API");
       }
@@ -46,27 +48,22 @@ function App() {
     // console.log("selected listing number set", number);
   };
 
+  console.log("filteredListings", filteredListings);
+
   return (
-    // <div>
-    //   <Grid container spacing={0.1}>
-    //     <Grid item xs={3} style={{ minWidth: 380, padding: 0 }}>
-    //       <SidePanel listings={listings} />
-    //     </Grid>
-    //     <Grid item xs={9}>
-    //       <Map />
-    //     </Grid>
-    //   </Grid>
-    // </div>
     <div style={{ maxHeight: "100%" }}>
       <Stack direction="row" spacing={0.1}>
         <SidePanel
           listings={listings}
+          filteredListings={filteredListings}
+          setFilteredListings={(newList) => setFilteredListings(newList)}
           style={{ minWidth: 380, padding: 0 }}
           selectedListingNumber={selectedListingNumber}
           setHoveredListing={(listing) => setHoveredListing(listing)}
         />
         <Map
           listings={listings}
+          filteredListings={filteredListings}
           setSelectedListingNumber={(n) => setListingNumber(n)}
           hoveredListing={hoveredListing}
         />

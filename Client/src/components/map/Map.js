@@ -5,10 +5,14 @@ import { GoogleMap, useJsApiLoader, LoadScript } from "@react-google-maps/api";
 import { Marker } from "@react-google-maps/api";
 // import { Polygon } from "@react-google-maps/api";
 import { OverlayView } from "@react-google-maps/api";
+import { DrawingManager } from "@react-google-maps/api";
 import { Stack } from "@mui/material";
 
 const Map = (props) => {
   // console.log("hovered listing", props.hoveredListing);
+
+  let shapes = [];
+
   const containerStyle = {
     width: "100%",
     height: "100vh",
@@ -27,6 +31,8 @@ const Map = (props) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyCuR5af4fifSI-5IKiBuGvajDq2oKuIBpM",
+    // libraries: ["drawing"],
+    libraries: ["places", "geometry", "visualization", "drawing"],
   });
 
   const [map, setMap] = React.useState(null);
@@ -68,17 +74,41 @@ const Map = (props) => {
     props.setSelectedListingNumber(listing.listingNumber);
   };
 
+  const onPolygonComplete = (polygon) => {
+    console.log("onPolygonComplete", polygon);
+  };
+  const onRectangleComplete = (rectangle) => {
+    console.log("onRectangleComplete", rectangle);
+    rectangle.visible = false;
+    setMap(null);
+  };
+  const handleOverlayComplete = (e) => {
+    const shape = e.overlay;
+    shape.type = e.type;
+    shapes.push(shape);
+  };
+
+  const deleteShapes = () => {
+    shapes.forEach((shape) => shape.setMap(null));
+  };
   // console.log("propsss", props);
   return isLoaded ? (
     <>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={5}
+        zoom={9}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {props?.listings?.map((listing) => {
+        <DrawingManager
+          // onLoad={(drawingManager) => console.log("testing", drawingManager)}
+          drawingMode="rectangle"
+          onPolygonComplete={onPolygonComplete}
+          onRectangleComplete={onRectangleComplete}
+          onOverlayComplete={handleOverlayComplete}
+        />
+        {props?.filteredListings?.map((listing) => {
           let position = {
             lat: listing.geoCode.latitude,
             lng: listing.geoCode.longitude,
