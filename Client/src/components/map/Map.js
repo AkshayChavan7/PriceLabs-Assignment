@@ -79,8 +79,13 @@ const Map = (props) => {
   };
   const onRectangleComplete = (rectangle) => {
     console.log("onRectangleComplete", rectangle);
-    rectangle.visible = false;
-    setMap(null);
+    let selectedLatLong = {
+      maxLat: rectangle.bounds.ub.hi,
+      minLat: rectangle.bounds.ub.lo,
+      maxLong: rectangle.bounds.Ra.hi,
+      minLong: rectangle.bounds.Ra.lo,
+    };
+    props.setLatLongObj(selectedLatLong);
   };
   const handleOverlayComplete = (e) => {
     const shape = e.overlay;

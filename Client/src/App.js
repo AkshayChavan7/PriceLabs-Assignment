@@ -9,10 +9,16 @@ import { Stack } from "@mui/material";
 
 function App() {
   const [listings, setListings] = React.useState([]);
+  const [listingsBackup, setListingsBackup] = React.useState([]);
   const [filteredListings, setFilteredListings] = React.useState([]);
   const [selectedListingNumber, setSelectedListingNumber] = React.useState(0);
   const [hoveredListing, setHoveredListing] = React.useState({});
-
+  const [latLongObj, setLatLongObj] = React.useState({
+    maxLat: 48.928167,
+    minLat: 48.644159,
+    maxLong: 2.492639,
+    minLong: 2.262097,
+  });
   React.useEffect(() => {
     (async () => {
       try {
@@ -28,6 +34,7 @@ function App() {
           minLat: 48.644159,
           maxLong: 2.492639,
           minLong: 2.262097,
+          // ...latLongObj,
           maxBedrooms: null,
           minBedrooms: 0,
           maxBathrooms: null,
@@ -36,6 +43,7 @@ function App() {
         const respListings = await getFilteredListings(requestParams);
         console.log("response->", respListings);
         setListings(respListings);
+        setListingsBackup(respListings);
         setFilteredListings(respListings);
       } catch (err) {
         console.log("Error while calling API");
@@ -43,18 +51,31 @@ function App() {
     })();
   }, []);
 
+  React.useEffect(() => {
+    // filter listings based on updated latitude and longitude
+    let listingsArray = listings.filter((listing) => {
+      if (
+        listing.geoCode.latitude >= latLongObj.minLat &&
+        listing.geoCode.latitude <= latLongObj.maxLat &&
+        listing.geoCode.longitude >= latLongObj.minLong &&
+        listing.geoCode.longitude <= latLongObj.maxLong
+      ) {
+        return listing;
+      }
+    });
+    setListingsBackup(listingsArray);
+  }, [latLongObj]);
+
   const setListingNumber = (number) => {
     setSelectedListingNumber(number);
     // console.log("selected listing number set", number);
   };
 
-  console.log("filteredListings", filteredListings);
-
   return (
     <div style={{ maxHeight: "100%" }}>
       <Stack direction="row" spacing={0.1}>
         <SidePanel
-          listings={listings}
+          listings={listingsBackup}
           filteredListings={filteredListings}
           setFilteredListings={(newList) => setFilteredListings(newList)}
           style={{ minWidth: 380, padding: 0 }}
@@ -63,6 +84,7 @@ function App() {
         />
         <Map
           listings={listings}
+          setLatLongObj={(obj) => setLatLongObj(obj)}
           filteredListings={filteredListings}
           setSelectedListingNumber={(n) => setListingNumber(n)}
           hoveredListing={hoveredListing}
