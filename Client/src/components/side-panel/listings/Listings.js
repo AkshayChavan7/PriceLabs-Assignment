@@ -8,9 +8,15 @@ const Listing = (props) => {
   let listings = props.listings;
   let filteredListings = [];
 
+  const removeListing = (key) => {
+    listings.splice(key, 1);
+    localStorage.setItem("previous_listings", JSON.stringify(listings));
+    // console.log("Updated listings ", newListings);
+  };
+
   return (
     <div style={{ height: "69vh", overflowY: "scroll", overflowX: "hidden" }}>
-      {listings.map((listing) => {
+      {listings.map((listing, key) => {
         if (
           props.searchText.length === 0 ||
           listing?.propertyId
@@ -75,7 +81,15 @@ const Listing = (props) => {
                         {" "}
                         ({listing.reviewCount})
                       </span>
-                      <span className="remove-label">Remove</span>
+                      <span
+                        className="remove-label"
+                        onClick={() => {
+                          console.log("Clicked on " + key + "th listing");
+                          removeListing(key);
+                        }}
+                      >
+                        Remove
+                      </span>
                     </div>
                   </Stack>
                 </Stack>

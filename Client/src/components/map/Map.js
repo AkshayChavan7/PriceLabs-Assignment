@@ -88,21 +88,18 @@ const Map = (props) => {
     props.setLatLongObj(selectedLatLong);
   };
   const handleOverlayComplete = (e) => {
+    console.log("check", e);
     const shape = e.overlay;
     shape.type = e.type;
     shapes.push(shape);
   };
 
-  const deleteShapes = () => {
-    shapes.forEach((shape) => shape.setMap(null));
-  };
-  // console.log("propsss", props);
   return isLoaded ? (
     <>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={9}
+        zoom={11}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >

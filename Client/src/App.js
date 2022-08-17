@@ -40,11 +40,26 @@ function App() {
           maxBathrooms: null,
           minBathrooms: 0,
         };
-        const respListings = await getFilteredListings(requestParams);
-        console.log("response->", respListings);
-        setListings(respListings);
-        setListingsBackup(respListings);
-        setFilteredListings(respListings);
+
+        // if the local storage has our previous listings then do not call the API, otherwise call it
+        let localStorageListings = await JSON.parse(
+          localStorage.getItem("previous_listings")
+        );
+        console.log("checking localStorageListings", localStorageListings);
+        if (localStorageListings === null) {
+          const respListings = await getFilteredListings(requestParams);
+          console.log("response->", respListings);
+          setListings(respListings);
+          setListingsBackup(respListings);
+          setFilteredListings(respListings);
+          localStorage.setItem(respListings);
+        } else {
+          // if local storage is already there
+          setListings(localStorageListings);
+          setListingsBackup(localStorageListings);
+          setFilteredListings(localStorageListings);
+          console.log("after setting listings", listings);
+        }
       } catch (err) {
         console.log("Error while calling API");
       }
@@ -76,6 +91,9 @@ function App() {
       <Stack direction="row" spacing={0.1}>
         <SidePanel
           listings={listingsBackup}
+          setListings={(newListings) => {
+            setListings(newListings);
+          }}
           filteredListings={filteredListings}
           setFilteredListings={(newList) => setFilteredListings(newList)}
           style={{ minWidth: 380, padding: 0 }}
